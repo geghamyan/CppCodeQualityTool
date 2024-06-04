@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "gtest",
+    "nlohmann-json",
+    "cxxopts",
+    "cpp-httplib",
+    "openssl"
+  ]
+}
