@@ -56,14 +56,16 @@ jobs:
       run: |
         git clone https://github.com/microsoft/vcpkg.git
         cd vcpkg 
-        .\bootstrap-vcpkg.bat
+        
+        echo "Running bootstrap-vcpkg.bat"
+        .\bootstrap-vcpkg.bat -disableMetrics
 #        ./vcpkg integrate install
 
-    # - name: Build project
-    #   run: |
-    #     cd build
-    #     cmake -G "Visual Studio 16 2019" ..
-    #     cmake --build . --config Release
+    - name: Build project
+      run: |
+        cd build
+        rem cmake -G "Visual Studio 16 2019" ..
+        cmake --build . --config Release
 
     # - name: Run tests
     #   run: |
