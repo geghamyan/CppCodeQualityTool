@@ -1,23 +1,97 @@
-name: C/C++ CI
+name: CppCodeQualityTool CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
-  build:
+  # build-linux:
+  #   runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+
+  #   - name: Set up C++ compiler
+  #     uses: actions/setup-cpp@v1
+  #     with:
+  #       compiler: g++-9
+
+  #   - name: Install dependencies
+  #     run: sudo apt-get install -y cmake
+
+  #   - name: Create build directory
+  #     run: mkdir build
+
+  #   - name: Build project
+  #     run: |
+  #       cd build
+  #       cmake ..
+  #       make
+
+  #   - name: Run tests
+  #     run: |
+  #       cd build
+  #       ctest --output-on-failure
+
+  build-windows:
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # - name: Set up MSVC
+    #   uses: actions/setup-msbuild@v1
+
+    # - name: Install dependencies
+    #   run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Install vcpkg
+      run: |
+        git clone https://github.com/microsoft/vcpkg.git
+        cd vcpkg
+        ./bootstrap-vcpkg.sh
+#        ./vcpkg integrate install
+
+    # - name: Build project
+    #   run: |
+    #     cd build
+    #     cmake -G "Visual Studio 16 2019" ..
+    #     cmake --build . --config Release
+
+    # - name: Run tests
+    #   run: |
+    #     cd build
+    #     ctest --output-on-failure --config Release
+
+
+
+# name: C/C++ CI
+
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - uses: actions/checkout@v4
+#     - name: configure
+#       run: ./configure
+#     - name: make
+#       run: make
+#     - name: make check
+#       run: make check
+#     - name: make distcheck
+#       run: make distcheck
