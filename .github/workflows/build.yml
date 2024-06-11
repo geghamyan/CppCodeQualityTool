@@ -63,8 +63,9 @@ jobs:
 
     - name: Build project
       run: |
-        cd build
+        #cd build
         # cmake -G "Visual Studio 16 2019" ..
+        #cmake --configure
         cmake --build . --config Release
 
     # - name: Run tests
