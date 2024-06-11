@@ -57,6 +57,27 @@ TEST_F(ParseCommandLineTest, ParseValidInput) {
 	EXPECT_TRUE(options->backup);
 }
 
+TEST_F(ParseCommandLineTest, ParseValidClassRefactoring) {
+	addArguments({
+		"CppCodeQualityTool",
+		"--input",
+		"input.cpp",
+		"--output",
+		"output.cpp",
+		"--class",
+		"MyClass",
+		"--backup" });
+
+	auto options = parseCommandLine(argc_, getArgv());
+	ASSERT_TRUE(options.has_value());
+
+	EXPECT_EQ(options->inputFile, "input.cpp");
+	EXPECT_EQ(options->outputFile, "output.cpp");
+	EXPECT_TRUE(options->className.has_value());
+	EXPECT_EQ(options->className.value(), "MyClass");
+	EXPECT_TRUE(options->backup);
+}
+
 TEST_F(ParseCommandLineTest, ParseMissingInputFile) {
 	addArguments({
 		"CppCodeQualityTool",

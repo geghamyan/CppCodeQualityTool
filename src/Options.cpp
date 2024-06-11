@@ -11,6 +11,7 @@ std::optional<Options> parseCommandLine(int argc, char** argv)
 		("i,input", "Input file path", cxxopts::value<std::string>())
 		("o,output", "Output file path", cxxopts::value<std::string>()->default_value(""))
 		("f,function", "Function name to refactor", cxxopts::value<std::string>())
+		("c,class", "Class name to refactor", cxxopts::value<std::string>())
 		("b,backup", "Create a backup file", cxxopts::value<bool>()->default_value("false"))
 		("h,help", "Print usage");
 
@@ -33,11 +34,16 @@ std::optional<Options> parseCommandLine(int argc, char** argv)
 		functionName = result["function"].as<std::string>();
 	}
 
+	std::optional<std::string> className;
+	if (result.count("class")) {
+		className = result["class"].as<std::string>();
+	}
+
 	bool backup = result["backup"].as<bool>();
 
 	if (outputFile.empty()) {
 		outputFile = inputFile;
 	}
 
-	return Options{ inputFile, outputFile, functionName, backup };
+	return Options{ inputFile, outputFile, functionName, className, backup };
 }

@@ -14,6 +14,7 @@ struct Options {
     std::string inputFile; ///< Path to the input file.
     std::string outputFile; ///< Path to the output file.
     std::optional<std::string> functionName; ///< Name of the function to refactor (optional).
+    std::optional<std::string> className; ///< Name of the class to refactor (optional).
     bool backup = false; ///< Flag indicating whether to create a backup file.
 };
 

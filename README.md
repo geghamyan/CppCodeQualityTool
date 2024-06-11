@@ -2,7 +2,7 @@
 
 ## Introduction
 
-CppCodeQualityTool is a command-line tool designed to analyze and improve the quality of C++ code. It detects long functions and splits them into smaller ones using a Large Language Model (LLM) from OpenAI. The tool is intended to evolve and be able to detect various code smells, such as long functions, primitive obsession, and more.CppCodeQualityTool is a command-line tool designed to analyze and improve the quality of C++ code. It detects long functions and splits them into smaller ones using a Large Language Model (LLM) from OpenAI.
+CppCodeQualityTool is a command-line tool designed to analyze and improve the quality of C++ code. It detects long functions and classes and splits them into smaller ones using a Large Language Model (LLM) from OpenAI. The tool is intended to evolve and be able to detect various other code smells, such as long functions, primitive obsession, and more.CppCodeQualityTool is a command-line tool designed to analyze and improve the quality of C++ code. It detects long functions and splits them into smaller ones using a Large Language Model (LLM) from OpenAI.
 
 ## Potential Extensibility
 
@@ -57,7 +57,7 @@ Before using the tool, you need to set up the OpenAI API key. This key is requir
 ## Usage
 
 ```sh
-CppCodeQualityTool --input <path-to-input-file> [--output <path-to-output-file>] [--function <function-name>] [--backup] [--help]
+CppCodeQualityTool --input <path-to-input-file> [--output <path-to-output-file>] [--function <function-name>] [--class <class-name>] [--backup] [--help]
 ```
 
 **Options**
@@ -71,9 +71,13 @@ CppCodeQualityTool --input <path-to-input-file> [--output <path-to-output-file>]
 ## Example
 
 To refactor a specific function and create a backup of the input file:
-
 ```sh
 CppCodeQualityTool --input example.cpp --output output.cpp --function myFunction --backup
+```
+
+To refactor a specific class and create a backup of the input file:
+```sh
+CppCodeQualityTool --input example.cpp --output output.cpp --class MyClass --backup
 ```
 
 To refactor a specific function without creating a backup:

@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <string>
+#include "CommandFactory.h"
 
 
 /**
@@ -16,19 +17,9 @@
  */
 static void executeFileProcessing(const Options& options)
 {
-	// Read file content
-	auto content = FileUtils::readFile(options.inputFile);
-
-	// Analyze file content
-	OpenAILLMInterface llMInterface;
-	FunctionAnalyzer analyzer(&llMInterface);
-
-	if (options.functionName) {
-		analyzer.splitFunction(content, options.functionName.value());
-
-		FileUtils::backupFile(options.outputFile);
-		FileUtils::writeFile(options.outputFile, content);
-	}
+	CommandFactory factory;
+	auto command = factory.createCommand(options);
+	command->execute();
 }
 
 /**
