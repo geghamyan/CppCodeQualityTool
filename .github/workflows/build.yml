@@ -61,6 +61,11 @@ jobs:
         .\bootstrap-vcpkg.bat -disableMetrics
 #        ./vcpkg integrate install
 
+    - name: Install vcpkg packages
+      run: |
+        cd vcpkg
+        ./vcpkg install gtest nlohmann-json cxxopts cpp-httplib openssl
+
     - name: Build project
       run: |
         cd build
